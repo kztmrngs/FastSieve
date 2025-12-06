@@ -380,7 +380,7 @@ int main(int argc, char *argv[]){
         ull primeCount = primes.size();
         printf("Primes up to %llu (total %llu):\n", hi, primeCount);
         for (const auto& p : primes) {
-            printf("%llu ", p);
+            printf("%llu, ", p);
         }
         printf("\n");
         printf("Time: %f seconds\n", elapsed.count());
@@ -394,7 +394,7 @@ int main(int argc, char *argv[]){
         ull primeCount = primes.size();
         printf("Primes from %llu to %llu (total %llu):\n", lo, hi, primeCount);
         for (const auto& p : primes) {
-            printf("%llu ", p);
+            printf("%llu, ", p);
         }
         printf("\n");
         printf("Time: %f seconds\n", elapsed.count());
