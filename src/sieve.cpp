@@ -75,8 +75,9 @@
 // --- 型・定数定義群 ---
 using ll = long long;
 using ull = unsigned long long;
-constexpr size_t CACHE_BYTES = 256 * 1024;
+constexpr size_t CACHE_BYTES = 256 * 1024; // 256kB
 constexpr size_t SEGMENT_SIZE = CACHE_BYTES * 30;
+char Buffer[1024 * 1024]; // 1MB
 static const char wheel30Offsets[8] = {1, 7, 11, 13, 17, 19, 23, 29};
 static const char constWheel30Offsets[8] = {7, 11, 13, 17, 19, 23, 29, 31};
 static const char wheel30Indexs[30] = {
@@ -359,6 +360,7 @@ std::vector<ull> sieveCompute(ull lo, ull hi, int mode){
 
 // 実質io関数
 int main(int argc, char *argv[]){
+    setvbuf(stdout, Buffer, _IOFBF, sizeof(Buffer));
     // 配列を確保
 
     // 入力を受け取る。
@@ -379,8 +381,11 @@ int main(int argc, char *argv[]){
         std::chrono::duration<double> elapsed = end - start;
         ull primeCount = primes.size();
         printf("Primes up to %llu (total %llu):\n", hi, primeCount);
-        for (const auto& p : primes) {
-            printf("%llu, ", p);
+        for (size_t i = 0; i < primes.size(); ++i) {
+            printf("%llu", primes[i]);
+            if (i < primes.size() - 1) {
+                printf(", ");
+            }
         }
         printf("\n");
         printf("Time: %f seconds\n", elapsed.count());
@@ -393,8 +398,11 @@ int main(int argc, char *argv[]){
         std::chrono::duration<double> elapsed = end - start;
         ull primeCount = primes.size();
         printf("Primes from %llu to %llu (total %llu):\n", lo, hi, primeCount);
-        for (const auto& p : primes) {
-            printf("%llu, ", p);
+        for (size_t i = 0; i < primes.size(); ++i) {
+            printf("%llu", primes[i]);
+            if (i < primes.size() - 1) {
+                printf(", ");
+            }
         }
         printf("\n");
         printf("Time: %f seconds\n", elapsed.count());
